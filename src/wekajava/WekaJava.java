@@ -1,7 +1,6 @@
 package wekajava;
 
 import weka.classifiers.Evaluation;
-import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.functions.MultilayerPerceptron;
 import weka.core.Debug;
 import weka.core.Instance;
@@ -9,7 +8,6 @@ import weka.core.Instances;
 import weka.core.SerializationHelper;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.Filter;
-import weka.filters.supervised.attribute.AddClassification;
 import weka.filters.unsupervised.attribute.Normalize;
 
 public class WekaJava {
@@ -39,7 +37,6 @@ public class WekaJava {
         Instances traindataset = new Instances(newdata, 0, trainSize);
         Instances testdataset = new Instances(newdata, trainSize, testSize);
         
-        
         // build classifier with train dataset   
         // neural ntworks classifier
         MultilayerPerceptron ann = new MultilayerPerceptron();
@@ -64,7 +61,5 @@ public class WekaJava {
                 String predString = testdataset.classAttribute().value((int) preNN);
                 System.out.println("actuel : " + actual + " ,predication   " + predString);
         }
-        
     }
-    
 }
