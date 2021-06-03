@@ -1,11 +1,7 @@
 package wekajava;
 
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.classifiers.evaluation.NominalPrediction;
-import weka.classifiers.evaluation.Prediction;
 import weka.classifiers.functions.MultilayerPerceptron;
 import weka.core.Debug;
 import weka.core.Instance;
