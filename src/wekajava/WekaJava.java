@@ -12,9 +12,9 @@ import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.Normalize;
 
 public class WekaJava {
-    public static final String modelpath = "E:/Master/DataSet/model.model";
+    public static final String modelpath = "E:/Master/DataSet/TEST/modelMer.model";
     public static void main(String[] args) throws Exception { // E:\Master\DataSet\new TEST [data mixed]
-        DataSource source = new DataSource("E:/Master/DataSet/TEST/test.arff");
+        DataSource source = new DataSource("E:/Master/DataSet/TEST/datamodel3.arff");
         Instances dataset = source.getDataSet();
         dataset.setClassIndex(dataset.numAttributes()-1);
         int numClasses = dataset.numClasses();
@@ -68,8 +68,8 @@ public class WekaJava {
         //0.358835,0.864053,-0.005573,-0.1986,-0.122358,-0.045218,-0.1986,-0.122358,-0.045218,running --> standding
         
         // add a new instance to which we apply a prediction 
-        addNewInstance(testdataset, 0.358835,0.864053,-0.005573,-0.1986,-0.122358,-0.045218,-0.1986,-0.122358,-0.045218);
-        System.out.println("last instn testdataset : \r\n " + testdataset.lastInstance());
+//        addNewInstance(testdataset, 0.358835,0.864053,-0.005573,-0.1986,-0.122358,-0.045218,-0.1986,-0.122358,-0.045218,50);
+        System.out.println("last instn testdataset : \r\n " + dataset.lastInstance());
 
         // make prediction of new instance by neural networks classifier
 //        Instances labeled = new Instances(testdataset);
@@ -81,13 +81,13 @@ public class WekaJava {
         
         // make prediction of a new instance using saved model 
         // load the model
-        Classifier cls = (Classifier) weka.core.SerializationHelper.read("E:/Master/DataSet/model.model");
+        Classifier cls = (Classifier) weka.core.SerializationHelper.read("E:/Master/DataSet/TEST/modelMer.model");
         
         Instances labeled2 = new Instances(testdataset);
         double value = cls.classifyInstance(testdataset.lastInstance());
         labeled2.lastInstance().setClassValue(value);
         System.out.println(value);
-        System.out.println("from the model hereeee: " + labeled2.lastInstance().stringValue(9));
+        System.out.println("from the model hereeee: " + labeled2.lastInstance().stringValue(10));
         System.out.println("last instn labeled 2 : \r\n " + labeled2.lastInstance());
         
  
@@ -105,9 +105,9 @@ public class WekaJava {
     
     public static void addNewInstance(Instances testdataset, double acc_x, double acc_y, double acc_z, 
             double gyro_x, double gyro_y, double gyro_z,
-            double magn_x, double magn_y, double magn_z ){
+            double magn_x, double magn_y, double magn_z, int steps ){
         
-        Instance inst = new Instance(10);
+        Instance inst = new Instance(11);
         inst.setValue(testdataset.attribute(0), acc_x);
         inst.setValue(testdataset.attribute(1), acc_y);
         inst.setValue(testdataset.attribute(2), acc_z);
@@ -117,6 +117,7 @@ public class WekaJava {
         inst.setValue(testdataset.attribute(6), magn_x);
         inst.setValue(testdataset.attribute(7), magn_y);
         inst.setValue(testdataset.attribute(8), magn_z);
+        inst.setValue(testdataset.attribute(9), steps);
 
         // add
         testdataset.add(inst);
